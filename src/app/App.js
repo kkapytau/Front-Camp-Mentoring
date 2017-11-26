@@ -33,6 +33,5 @@ $(".dropdown-menu").click((e) =>{
     $(".news").eq(0).html('').append(newsData.join(''));
   });
 
-  let currentNew = $(".channel-title").removeClass("hidden");
-  currentNew.text(`Your choice is channel: «${target.innerHTML}»`);
+  $(".channel-title").removeClass("hidden").text(`Your choice is channel: «${target.innerHTML}»`);
 });
