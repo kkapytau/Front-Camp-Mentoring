@@ -1,23 +1,37 @@
+class NewsApp {
+  constructor(){
+    this.api = new NewsAPI(API_KEY);
+    this.channels = this.api.getNewsChannel();
+  }
 
-const api = new NewsAPI(API_KEY);
+  drawChannels() {
+    this.channels.then(data => {
+      const channelOptions = data.sources.map(item => {
+        return `<li><a data-channel-id="${item.id}" href="${item.url}">${item.name}</a></li>`;
+      });
+      // remove "," from the Array of strings using join("")
+      this.drawData('dropdown-menu', channelOptions.join(""));
+      this.showNews('dropdown-menu');
+    });
+  }
 
-const channels = api.getNewsChannel();
-channels.then(data => {
-  const channelOptions = data.sources.map(item => {
-    return `<li><a data-channel-id="${item.id}" href="${item.url}">${item.name}</a></li>`;
-  });
-  // we use join, as channelOptions is array and result source will be with comma like: a1,a2,a3
-  document.getElementsByClassName('dropdown-menu')[0].innerHTML = channelOptions.join("");
-});
+  drawData(elemClass, data, removeIndicator) {
+    let elem = document.getElementsByClassName(elemClass)[0];
+    elem.innerHTML = data;
+    if(removeIndicator) {
+      elem.classList.remove('hidden');
+    }
+  }
 
-document.getElementsByClassName('dropdown-menu')[0].addEventListener("click",(e) =>{
-  e.preventDefault();
-  const target = e.target;
-  let news = api.getNews(target.getAttribute("data-channel-id"));
-  news.then(data => {
-    const newsData = data.articles.map(item => {
-      const tmpArr = (item.publishedAt) ? item.publishedAt.replace('Z','').split('T') : ['Today','00:00:00'];
-      return `<a href="${item.url}">
+  showNews(targetClass) {
+    document.getElementsByClassName(targetClass)[0].addEventListener("click",(e) =>{
+      e.preventDefault();
+      const target = e.target;
+      let news = this.api.getNews(target.getAttribute("data-channel-id"));
+      news.then(data => {
+        const newsData = data.articles.map(item => {
+          const tmpArr = (item.publishedAt) ? item.publishedAt.replace('Z','').split('T') : ['Today','00:00:00'];
+          return `<a href="${item.url}">
             <figure>
                 <img src="${(item.urlToImage) ? item.urlToImage : './images/nopapernonews.jpg'}" alt="${item.title}">
                 <figcaption>
@@ -28,13 +42,17 @@ document.getElementsByClassName('dropdown-menu')[0].addEventListener("click",(e)
                 </figcaption>
             </figure>
         </a>`;
+        });
+        // remove "," from the Array of strings using join("")
+        this.drawData('news', newsData.join(""));
+      });
+
+      this.drawData('channel-title', `Your choice is channel: «${target.innerHTML}»`, true);
     });
-    // remove "," from the result object using join("")
-    document.getElementsByClassName('news')[0].innerHTML = newsData.join("");
-  });
+  }
 
-  let channelTitle = document.getElementsByClassName('channel-title')[0];
-  channelTitle.classList.remove('hidden');
-  channelTitle.innerHTML = `Your choice is channel: «${target.innerHTML}»`;
+}
 
-});
+const app = new NewsApp();
+
+app.drawChannels();
