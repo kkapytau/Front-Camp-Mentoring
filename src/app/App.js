@@ -1,16 +1,16 @@
 
-const api = new NewsAPI("54c4b6ecb4394f91a1c3a7d88188cf26");
+const api = new NewsAPI(API_KEY);
 
 const channels = api.getNewsChannel();
 channels.then(data => {
   const channelOptions = data.sources.map(item => {
     return `<li><a data-channel-id="${item.id}" href="${item.url}">${item.name}</a></li>`;
   });
-
-  $(".dropdown-menu").eq(0).append(channelOptions.join(''));
+  // we use join, as channelOptions is array and result source will be with comma like: a1,a2,a3
+  document.getElementsByClassName('dropdown-menu')[0].innerHTML = channelOptions.join("");
 });
 
-$(".dropdown-menu").click((e) =>{
+document.getElementsByClassName('dropdown-menu')[0].addEventListener("click",(e) =>{
   e.preventDefault();
   const target = e.target;
   let news = api.getNews(target.getAttribute("data-channel-id"));
@@ -29,9 +29,12 @@ $(".dropdown-menu").click((e) =>{
             </figure>
         </a>`;
     });
-
-    $(".news").eq(0).html('').append(newsData.join(''));
+    // remove "," from the result object using join("")
+    document.getElementsByClassName('news')[0].innerHTML = newsData.join("");
   });
 
-  $(".channel-title").removeClass("hidden").text(`Your choice is channel: «${target.innerHTML}»`);
+  let channelTitle = document.getElementsByClassName('channel-title')[0];
+  channelTitle.classList.remove('hidden');
+  channelTitle.innerHTML = `Your choice is channel: «${target.innerHTML}»`;
+
 });

@@ -5,17 +5,15 @@ class NewsAPI {
   getNewsChannel(){
     const apiKey = this.apiKey;
     return new Promise((resolve, reject) => {
+      const ajax = new XMLHttpRequest();
       try {
-        $.ajax({
-          url: "https://newsapi.org/v2/sources?language=en&country=us",
-          data: {
-            apiKey
-          },
-          dataType: 'json',
-          success: resp => {
-            resolve(resp);
+        ajax.open("GET", `${GET_NEWS_CHANNEL_URL}&apiKey=${apiKey}`, true);
+        ajax.send();
+        ajax.onreadystatechange = () => {
+          if (ajax.readyState == 4 && ajax.status == 200) {
+            resolve(JSON.parse(ajax.responseText));
           }
-        });
+        };
       }
       catch (e) {
         reject(e)
@@ -25,18 +23,15 @@ class NewsAPI {
   getNews(sources){
     const apiKey = this.apiKey;
     return new Promise((resolve, reject) => {
+      const ajax = new XMLHttpRequest();
       try {
-        $.ajax({
-          url: "https://newsapi.org/v2/top-headlines",
-          data: {
-            apiKey,
-            sources
-          },
-          dataType: 'json',
-          success: resp => {
-            resolve(resp);
+        ajax.open("GET", `${GET_NEWS_URL}=${sources}&apiKey=${apiKey}`, true);
+        ajax.send();
+        ajax.onreadystatechange = () => {
+          if (ajax.readyState == 4 && ajax.status == 200) {
+            resolve(JSON.parse(ajax.responseText));
           }
-        });
+        };
       }
       catch (e) {
         reject(e)
