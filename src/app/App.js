@@ -1,3 +1,6 @@
+import { API_KEY } from '../constants/consts.js';
+import NewsAPI from '../api/NewsAPI.js';
+
 class NewsApp {
   constructor(){
     this.api = new NewsAPI(API_KEY);

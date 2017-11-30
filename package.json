@@ -1,0 +1,17 @@
+{
+  "name": "Front-Camp-Mentoring",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "babel src -d lib && browserify lib/app/App.js > lib/app/bundle.js",
+    "start-dev": "http-server ./src -p 1337"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "webpack-dev-server": "^2.9.5"
+  },
+  "dependencies": {
+    "promise-polyfill": "6.1.0",
+    "setasap": "^2.0.0"
+  }
+}
