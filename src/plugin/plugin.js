@@ -1,8 +1,13 @@
+let whatRemove = null;
+
 module.exports = function({ types: t }) {
   return {
     visitor: {
-      MemberExpression(path) {
-        if (path.node.object.name === "console") {
+      Program(path, state) {
+        whatRemove = state.opts.removeNode;
+      },
+      MemberExpression(path, state) {
+        if (path.node.object.name === whatRemove) {
           path.parentPath.parentPath.remove();
         }
       }

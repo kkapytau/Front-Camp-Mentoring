@@ -3,6 +3,6 @@
         "env"
     ],
     "plugins": [
-        "./src/plugin/plugin.js"
+        ["./src/plugin/plugin.js", { "removeNode": "console" }]
     ]
 }

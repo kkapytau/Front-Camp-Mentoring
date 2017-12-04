@@ -16,4 +16,4 @@ class test{
   }
 }
 
-console.log("Finished");
+var tmp = 1; console.log("Finished");
