@@ -1,5 +1,8 @@
 {
     "presets": [
         "env"
+    ],
+    "plugins": [
+        "./src/plugin/plugin.js"
     ]
 }
