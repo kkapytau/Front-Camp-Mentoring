@@ -1,6 +1,12 @@
-class NewsAPI {
+import Promise from 'promise-polyfill';
+import setAsap from 'setasap';
+
+import { GET_NEWS_URL, GET_NEWS_CHANNEL_URL } from '../constants/consts.js';
+
+export default class NewsAPI {
   constructor(apiKey) {
     this.apiKey = apiKey;
+    Promise._immediateFn = setAsap;
   }
   getNewsChannel(){
     const apiKey = this.apiKey;
