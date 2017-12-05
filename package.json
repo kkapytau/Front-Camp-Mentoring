@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "babel src -d lib && browserify lib/app/App.js > lib/app/bundle.js | lessc src/styles/main.less src/styles/main.css",
+    "test-custom-plugin": "babel src/plugin/test.js -d lib",
     "start-dev": "http-server ./src -p 1337"
   },
   "devDependencies": {
