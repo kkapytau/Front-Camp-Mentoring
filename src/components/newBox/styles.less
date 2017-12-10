@@ -1,0 +1,53 @@
+@import '../../styles/common';
+
+.news {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px 15px 0 15px;
+
+  a:hover, a:visited, a:link, a:active
+  {
+    text-decoration: none;
+  }
+
+  figure {
+    margin: 0 35px 30px 0;
+    cursor: pointer;
+    max-width: 350px;
+
+    img{
+      max-width: 350px;
+    }
+    figcaption {
+      margin: 5px;
+      .title {
+        .blackText();
+      }
+      .date {
+        float: right;
+        border: 1px solid grey;
+        padding: 0 5px;
+        border-radius: 4px;
+      }
+      .description {
+        display: block;
+        color: grey;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .news{
+    flex-direction: column;
+    figure{
+      margin: 0 0 30px 0;
+      border-bottom: 2px dotted black;
+      padding-bottom: 30px;
+
+      img{
+        max-width: 300px;
+      }
+    }
+  }
+}
