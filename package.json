@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.7",
@@ -22,6 +23,7 @@
     "webpack-merge": "^4.1.1"
   },
   "dependencies": {
+    "babel-loader": "^7.1.2",
     "babel-traverse": "^6.26.0",
     "babylon": "^6.18.0",
     "promise-polyfill": "6.1.0",

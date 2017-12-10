@@ -7,7 +7,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   entry: {
     news: [
-      'promise-polyfill',
+      'babel-polyfill',
       './src/app/App.js'
     ]
   },
@@ -39,6 +39,11 @@ module.exports = {
           fallback: 'style-loader',
           use: ['css-loader', 'less-loader']
         })
+      },
+      {
+        test: /\.js?$/,
+        exclude: /node_modules/,
+        use: ['babel-loader']
       },
       {
         test: /\.css$/,
