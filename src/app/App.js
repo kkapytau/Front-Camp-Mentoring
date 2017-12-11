@@ -1,5 +1,8 @@
 import { API_KEY, YOUR_CHOICE } from '../constants/consts.js';
 import NewsAPI from '../api/NewsAPI.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'jquery';
+import 'bootstrap';
 import '../styles/main.less';
 import OptionItem from '../components/option/OptionItem.js';
 import NewsItem from '../components/newBox/NewsItem.js';
