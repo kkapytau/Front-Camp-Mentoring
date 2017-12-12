@@ -1,7 +1,5 @@
 # Front-Camp-Mentoring
 
-Open "command line" and execute: "npm run build"
+Open "command line" and execute: "npm install"
 
-Open index.htm page in the Chrome
-
-Run command: npm run test-custom-plugin to test custom plugin, which will remove all "console" stuff
+Run command: 'npm run start-dev' to run 'Dev Server'. Page will opened automatically by url: 'http://localhost:8081/'
