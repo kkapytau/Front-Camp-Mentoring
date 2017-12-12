@@ -1,15 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const entryNews = [
+  'babel-polyfill',
+  './src/app/App.js'
+];
 
 module.exports = {
   entry: {
-    news: [
-      'babel-polyfill',
-      './src/app/App.js'
-    ]
+    news: entryNews
   },
   output: {
     path: path.join(__dirname, './dist'),
@@ -17,7 +18,6 @@ module.exports = {
     publicPath: '/'
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       title: 'Output Management',
       hash: true,
@@ -35,7 +35,8 @@ module.exports = {
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default']
-    })
+    }),
+    new OptimizeCssAssetsPlugin()
   ],
   module: {
     rules: [

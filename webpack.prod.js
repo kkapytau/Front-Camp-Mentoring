@@ -11,5 +11,9 @@ module.exports = merge(common, {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     })
-  ]
+  ],
+  devServer: {
+    port: 8082,
+    contentBase: './dist',
+  }
 });
