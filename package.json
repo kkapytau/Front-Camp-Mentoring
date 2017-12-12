@@ -30,6 +30,7 @@
     "jquery": "^3.2.1",
     "popper.js": "^1.12.9",
     "promise-polyfill": "6.1.0",
+    "require-ensure": "^1.0.2",
     "setasap": "^2.0.0"
   }
 }

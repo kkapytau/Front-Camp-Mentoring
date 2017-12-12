@@ -5,7 +5,6 @@ import 'jquery';
 import 'bootstrap';
 import '../styles/main.less';
 import OptionItem from '../components/option/OptionItem.js';
-import NewsItem from '../components/newBox/NewsItem.js';
 
 class NewsApp {
   constructor(){
@@ -18,34 +17,38 @@ class NewsApp {
       const channelOptions = data.sources.map(item => {
         return OptionItem(item);
       });
-      // remove "," from the Array of strings using join("")
-      this.drawData('dropdown-menu', channelOptions.join(""));
-      this.showNews('dropdown-menu');
+      this.drawData('.dropdown-menu', channelOptions);
+      this.showNews('.dropdown-menu');
     });
   }
 
   drawData(elemClass, data, removeIndicator) {
-    let elem = document.getElementsByClassName(elemClass)[0];
-    elem.innerHTML = data;
+    let elem = $(elemClass).eq(0).html('');
+    elem.append(data);
     if(removeIndicator) {
-      elem.classList.remove('hidden');
+      elem.removeClass('hidden');
     }
   }
 
   showNews(targetClass) {
-    document.getElementsByClassName(targetClass)[0].addEventListener("click",(e) =>{
+    $(targetClass).eq(0).on("click",(e) =>{
       e.preventDefault();
       const target = e.target;
       let news = this.api.getNews(target.getAttribute("data-channel-id"));
-      news.then(data => {
-        const newsData = data.articles.map(item => {
-          return NewsItem(item);
+
+      $('.show-news').eq(0).on( "click", () => {
+        require.ensure(['../components/newBox/NewsItem'], (require) => {
+          const NewsItem = require("../components/newBox/NewsItem").default;
+          news.then(data => {
+            const newsData = data.articles.map(item => {
+              return NewsItem(item);
+            });
+            this.drawData('.news', newsData);
+          });
         });
-        // remove "," from the Array of strings using join("")
-        this.drawData('news', newsData.join(""));
       });
 
-      this.drawData('channel-title', `${YOUR_CHOICE} «${target.innerHTML}»`, true);
+      this.drawData('.channel-title', `${YOUR_CHOICE} «${target.innerHTML}»`, true);
     });
   }
 
