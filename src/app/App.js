@@ -5,6 +5,7 @@ import 'jquery';
 import 'bootstrap';
 import '../styles/main.less';
 import OptionItem from '../components/option/OptionItem.js';
+import removeNumbers from '../loader/removeNumberKeysFromJson.js';
 
 class NewsApp {
   constructor(){
@@ -57,3 +58,5 @@ class NewsApp {
 const app = new NewsApp();
 
 app.drawChannels();
+
+removeNumbers();

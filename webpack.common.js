@@ -41,6 +41,14 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.json/,
+        use: [
+          {
+            loader: 'remove-numbers-loader',
+          }
+        ]
+      },
+      {
         test: /\.less$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
@@ -66,5 +74,8 @@ module.exports = {
         ]
       }
     ]
+  },
+  resolveLoader: {
+    modules: ['node_modules', path.resolve(__dirname, "src", "loader")]
   }
 };
