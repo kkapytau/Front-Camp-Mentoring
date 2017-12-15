@@ -2,19 +2,39 @@
   "name": "Front-Camp-Mentoring",
   "version": "1.0.0",
   "scripts": {
-    "build": "babel src -d lib && browserify lib/app/App.js > lib/app/bundle.js | lessc src/styles/main.less src/styles/main.css",
+    "build": "set NODE_ENV=production & webpack --config webpack.prod.js",
     "test-custom-plugin": "babel src/plugin/test.js -d lib",
-    "start-dev": "http-server ./src -p 1337"
+    "start-dev": "webpack-dev-server --open --config webpack.dev.js",
+    "start-prod": "webpack-dev-server --open --config webpack.prod.js",
+    "build-loader": "webpack --config webpack.dev.js"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "webpack-dev-server": "^2.9.5"
+    "clean-webpack-plugin": "^0.1.17",
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.5",
+    "html-webpack-plugin": "^2.30.1",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "optimize-css-assets-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.19.0",
+    "uglifyjs-webpack-plugin": "^1.1.2",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.5",
+    "webpack-merge": "^4.1.1"
   },
   "dependencies": {
+    "babel-loader": "^7.1.2",
     "babel-traverse": "^6.26.0",
     "babylon": "^6.18.0",
+    "bootstrap": "^4.0.0-beta.2",
+    "jquery": "^3.2.1",
+    "popper.js": "^1.12.9",
     "promise-polyfill": "6.1.0",
+    "require-ensure": "^1.0.2",
     "setasap": "^2.0.0"
   }
 }
