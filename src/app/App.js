@@ -7,8 +7,11 @@ import ProxyNewsAPI from '../patterns/ProxyNewsAPI.js';
 import Observer from '../patterns/EventObserver.js';
 import { AddFakeNewStrategy, topFakeNew, bottomFakeNew } from '../patterns/Strategy.js';
 import '../styles/main.less';
-import OptionItem from '../components/option/OptionItem.js';
 import removeNumbers from '../loader/removeNumberKeysFromJson.js';
+// Flux
+import newsActions from '../flux/NewsActionsCreator.js';
+import newsStore from '../flux/NewsStore.js';
+import channelsStore from '../flux/ChannelsStore.js';
 
 /*
 * Class NewsApp was rewritten for implementation Prototype Pattern
@@ -16,7 +19,9 @@ import removeNumbers from '../loader/removeNumberKeysFromJson.js';
 function NewsApp(){
   //this.api = new NewsAPI(API_KEY); // now we use Proxy Api for common requests. Cache 1 hour for news
   this.api = new ProxyNewsAPI(API_KEY);
-  this.channels = this.api.getNewsChannel();
+
+  channelsStore.addChangeListener(this.drawChannels.bind(this));
+  //newsStore.addChangeListener(this.showNews.bind(this));
 
   // just for observer
   this.newsList = [];
@@ -46,14 +51,25 @@ NewsApp.prototype = function() {
     });
   };
 
+  const getChannels = function() {
+    newsActions.getNewsChannels(this.api.getNewsChannel());
+  };
+
   const drawChannels = function() {
-    this.channels.then(data => {
-      const channelOptions = data.sources.map(item => {
-        return OptionItem(item);
-      });
-      drawData('.dropdown-menu', channelOptions);
-      this.showNews('.dropdown-menu');
+    drawData('.dropdown-menu', channelsStore.getList());
+    this.getNews('.dropdown-menu');
+  };
+
+  const getNews = function(targetClass) {
+    $(targetClass).eq(0).on("click",(e) => {
+      e.preventDefault();
+      const target = e.target;
+
+      newsActions.getSelectedNews(this.api.getNews(target.getAttribute("data-channel-id")));
+      drawData('.channel-title', `${YOUR_CHOICE} «${target.innerHTML}»`, true);
+
     });
+    this.showNews();
   };
 
   const drawData = function(elemClass, data, removeIndicator) {
@@ -64,41 +80,32 @@ NewsApp.prototype = function() {
     }
   };
 
-  const showNews = function(targetClass) {
-    $(targetClass).eq(0).on("click",(e) =>{
-      e.preventDefault();
-      const target = e.target;
-      let news = this.api.getNews(target.getAttribute("data-channel-id"));
+  const showNews = function() {
+    $('.show-news').eq(0).on( "click", () => {
+      require.ensure(['../components/newBox/NewsItem'], () => {
+        const newsData = newsStore.getList();
 
-      $('.show-news').eq(0).on( "click", () => {
-        require.ensure(['../components/newBox/NewsItem'], (require) => {
-          const NewsItem = require("../components/newBox/NewsItem").default;
-          news.then(data => {
-            const newsData = data.articles.map(item => {
-              return NewsItem(item);
-            });
-            // just for observer
-            this.newsList = newsData;
-            drawData('.news', newsData);
-          });
-        });
+        // just for observer
+        this.newsList = newsData;
+
+        drawData('.news', newsData);
       });
-
-      drawData('.channel-title', `${YOUR_CHOICE} «${target.innerHTML}»`, true);
     });
   };
 
   return {
     drawChannels,
     showNews,
-    addFakeNew
+    addFakeNew,
+    getChannels,
+    getNews
   }
 
 }();
 
 const app = new NewsApp();
 
-app.drawChannels();
+app.getChannels();
 app.addFakeNew();
 
 removeNumbers();
