@@ -3,10 +3,29 @@ import setAsap from 'setasap';
 
 import { GET_NEWS_URL, GET_NEWS_CHANNEL_URL } from '../constants/consts.js';
 
+let singletonInstance;
+
+const fakeNew = {
+  url: 'test-url.com',
+  urlToImage: '',
+  title: 'Fake New',
+  description: 'Fake New Description',
+  author: 'Mr. K'
+};
+
 export default class NewsAPI {
+
   constructor(apiKey) {
     this.apiKey = apiKey;
     Promise._immediateFn = setAsap;
+
+    if(singletonInstance){
+      return singletonInstance;
+    }
+    singletonInstance = this;
+  }
+  getFakeNew(){
+    return fakeNew;
   }
   getNewsChannel(){
     const apiKey = this.apiKey;
