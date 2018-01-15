@@ -2,10 +2,10 @@
 
 1) Download "Mongo DB" from https://www.mongodb.com/
 2) Add to the Path - path to the "bin" folder for mongoDb (like: C:\Program Files\MongoDB\Server\3.6\bin\)
-2.1) Create folder db
-3) run mongod --dbpath ./db
-4) mongoimport --db frontcamp --collection restaurants --file restaurants.json
-5) in the new "command line" run "mongo" and then "use frontcamp"
+3) Create folder db
+4) run mongod --dbpath ./db
+5) mongoimport --db frontcamp --collection restaurants --file restaurants.json
+6) in the new "command line" run "mongo" and then "use frontcamp"
 
 # Task 3:
 1) db.restaurants.find({$and:[ {cuisine: 'Chinese'},{borough:"Queens"}]}).count()		Result: 728
