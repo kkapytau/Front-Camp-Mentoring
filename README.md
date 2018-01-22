@@ -41,7 +41,13 @@
 
 run: mongod --dbpath ./db
 run: mongoimport.exe -d frontcamp -c airlines --type csv --headerline airlines.csv
-run: mongorestore -d frontcamp -c enron ./enron/messages.bson
+
+Download enron.zip file from:
+https://epam-my.sharepoint.com/personal/ilya_loika_epam_com/_layouts/15/onedrive.aspx?slrid=2005439e-40b5-4000-cd24-93271c1bdb62&id=%2Fpersonal%2Filya_loika_epam_com%2FDocuments%2Fperm%2FMongoDB_2&FolderCTID=0x012000BBBD6A61B3827146A7B30D2F8B57F756
+
+Unzip the contents to a folder 
+
+run: mongorestore -d frontcamp -c enron ./dump/enron/messages.bson
 run: "mongo" and then "use frontcamp"
 
 # Task 3:
