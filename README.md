@@ -37,14 +37,14 @@
 
 # Front-Camp-Mentoring	Mongo DB Part2
 
-##in the new "command line"
+## in the new "command line"
 
 run: mongod --dbpath ./db
 run: mongoimport.exe -d frontcamp -c airlines --type csv --headerline airlines.csv
 run: mongorestore -d frontcamp -c enron ./enron/messages.bson
 run: "mongo" and then "use frontcamp"
 
-#Task 3:
+# Task 3:
 1)	db.airlines.aggregate([{$group: {_id: "$class", total: { $sum: 1 }}},{$project: {class: "$_id", total: "$total", _id: 0}}])
 Results:
 { "class" : "F", "total" : 140343 }
@@ -88,6 +88,6 @@ Results:
 	
 
 	
-#Task 4:	
+# Task 4:	
 1) db.enron.aggregate([{$unwind:"$headers.To"},{$group:{_id : "$_id", to_unic:{$addToSet: "$headers.To"}, from:{$first:"$headers.From"}}}, {$unwind:"$to_unic"},  {$group:{_id : {from : "$from", to: "$to_unic"}, total: { $sum: 1 }}},{$sort:{"total":-1}}, {$limit : 1}])
 { "_id" : { "from" : "susan.mara@enron.com", "to" : "jeff.dasovich@enron.com" }, "total" : 750 }
