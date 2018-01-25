@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    H1 Blogs:
+    section.blogs
+        each blog in blogs
+            div.blog
+                h4.title= blog.title
+                div.article= blog.article
+                span.date= "Published at: "+ blog.date
+                span.author= blog.author

@@ -1,0 +1,25 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+a {
+  color: #00B7FF; }
+
+.blogs {
+  display: flex;
+  flex-direction: column; }
+  .blogs .author {
+    float: right;
+    padding: 0 10px 10px 10px; }
+  .blogs .blog {
+    max-width: 400px;
+    border: 1px solid black;
+    margin-bottom: 10px; }
+  .blogs .date {
+    padding: 0 10px 10px 10px; }
+  .blogs .title {
+    text-align: center; }
+  .blogs .article {
+    padding: 10px; }
+
+/*# sourceMappingURL=style.css.map */
