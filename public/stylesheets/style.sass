@@ -1,0 +1,27 @@
+body
+  padding: 50px
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+
+a
+  color: #00B7FF
+
+=blogsPaddig()
+  padding: 0 10px 10px 10px
+
+.blogs
+  .author
+    float: right
+    +blogsPaddig()
+  .blog
+    max-width: 400px
+    border: 1px solid black
+    margin-bottom: 10px
+  .date
+    +blogsPaddig()
+  .title
+    text-align: center
+  .article
+    padding: 10px
+
+  display: flex
+  flex-direction: column
