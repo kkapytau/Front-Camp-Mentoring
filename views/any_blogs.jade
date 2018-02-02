@@ -7,5 +7,5 @@ block content
             div.blog
                 h4.title= blog.title
                 div.article= blog.article
-                span.date= "Published at: "+ blog.date
+                span.date= "Published at: "+ blog.date.toDateString()
                 span.author= blog.author
