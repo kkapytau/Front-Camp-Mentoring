@@ -34,9 +34,6 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// add middleware for POST
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded());
 
 // required for passport
 app.use(session({ secret: 'SECRET' })); // session secret
