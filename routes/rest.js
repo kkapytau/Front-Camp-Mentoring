@@ -7,7 +7,8 @@ const logger = require('../public/javascripts/logger/winston');
 //const blogsApi = require('../public/javascripts/static_blogs/blogs');
 const dataBaseAPI = require('../public/javascripts/mongooseDB/dbAPI');
 
-router.get('/', function(req, res, next) {
+router.get('/', isLoggedIn, function(req, res, next) {
+  console.log("Blog path was detected");
   logger.info(url.format({
     protocol: req.protocol,
     host: req.get('host'),
@@ -18,7 +19,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.get('/:id', function(req, res, next) {
+router.get('/:id', isLoggedIn, function(req, res, next) {
   logger.info(url.format({
     protocol: req.protocol,
     host: req.get('host'),
@@ -74,5 +75,16 @@ router.delete('/:id', function(req, res, next) {
     });
   });
 });
+
+// route middleware to make sure
+function isLoggedIn(req, res, next) {
+
+  // if user is authenticated in the session, carry on
+  if (req.isAuthenticated())
+    return next();
+  console.log("User is not Authenticated!!! "+req.originalUrl);
+  // if they aren't redirect them to the home page
+  res.redirect('/');
+}
 
 module.exports = router;

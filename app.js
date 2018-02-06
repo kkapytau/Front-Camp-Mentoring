@@ -8,6 +8,9 @@ const bodyParser = require('body-parser');
 const index = require('./routes/index');
 const any = require('./routes/any');
 const rest = require('./routes/rest');
+const passportLocal = require('./routes/passportLocal');
+const passport = require('passport');
+const session = require('express-session')
 
 const app = express();
 
@@ -17,6 +20,8 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+require('./public/javascripts/passport/localStrategy')(passport); // pass passport for configuration
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,13 +35,19 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 
 // add middleware for POST
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded());
+
+// required for passport
+app.use(session({ secret: 'SECRET' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
 
 // uncomment that for Task 2
 //app.use('*', any);
 
 app.use('/blogs', rest);
+app.use('/', passportLocal);
 
 app.use('*', index);
 
