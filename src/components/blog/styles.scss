@@ -1,0 +1,14 @@
+.blog {
+  max-width: 300px;
+  border: 1px solid black;
+  margin: 10px;
+  .author {
+    float: right;
+  }
+  .title {
+    text-align: center
+  }
+  .article{
+    padding: 10px
+  }
+}
