@@ -1,25 +1,25 @@
 import dateformat from 'dateformat';
 
-const blogs = [
+export const blogs = [
   {
     id: 1,
     author: "Mr. K",
     article: "It is test artiIt is test articleIt is test articlecle",
-    date: "01/25/2018",
+    date: "2018-03-26 T00:00:00.000",
     title: "Title"
   },
   {
     id: 2,
     author: "Mr. K2",
     article: "It is test artiIt is test articleIt is test articlecle 2",
-    date: "01/25/2018",
+    date: "2018-03-26 T00:00:00.000",
     title: "Title2"
   },
   {
     id: 3,
     author: "Mr. K3",
     article: "It is test artiIt is test articleIt is test articlecle 3",
-    date: "01/25/2018",
+    date: "2018-03-26 T00:00:00.000",
     title: "Title3"
   }
 ];
