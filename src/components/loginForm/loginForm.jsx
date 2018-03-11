@@ -2,8 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link, Redirect } from 'react-router-dom';
-import { currentUser } from '../../helper/current-user/currentUser';
+import { currentUser } from '../../helper/userApi/userApi';
+//import currentUser from '../../helper/current-user/currentUser';
+
+import validator from 'validator';
 import './styles.scss';
+import { LOGIN_EMAIL_ERROR_MSG, LOGIN_PASSWORD_ERROR_MSG } from '../../redux/constants/Constants';
 
 export class loginForm extends React.PureComponent {
 
@@ -11,7 +15,8 @@ export class loginForm extends React.PureComponent {
         super(props);
         this.state = {
             email : "",
-            password : ""
+            password : "",
+            errorMsg : ""
         };
 
         this.handleLogin = this.handleLogin.bind(this);
@@ -27,9 +32,26 @@ export class loginForm extends React.PureComponent {
         this.setState({ password: event.target.value});
     }
 
+    isFormValid(){
+        const { email, password } = this.state;
+        if(validator.isEmpty(email)){
+            this.setState({ errorMsg: LOGIN_EMAIL_ERROR_MSG});
+            return false;
+        }
+        if(validator.isEmpty(password)){
+            this.setState({ errorMsg: LOGIN_PASSWORD_ERROR_MSG});
+            return false;
+        }
+
+        return true;
+    }
+
     handleSubmit(event){
         event.preventDefault();
-        this.props.logIn(this.state);
+        if(this.isFormValid()) {
+            this.props.logIn(this.state);
+            this.setState({errorMsg: ""});
+        }
     }
 
     render() {
@@ -47,6 +69,7 @@ export class loginForm extends React.PureComponent {
                         <div className="row">
                             <div className="col-md-6 mx-auto">
                                 <span className="mb-0 error-msg">{ this.props.serverErrorMsg }</span>
+                                <span className="mb-0 error-msg">{ this.state.errorMsg }</span>
                                 <div className="card rounded-0">
                                     <div className="card-header">
                                         <h3 className="mb-0">Login</h3>
@@ -91,7 +114,7 @@ export class loginForm extends React.PureComponent {
 const mapStateToProps = function (store) {
     return {
         redirectToReferrer: store.userState.redirectToReferrer,
-        serverErrorMsg: store.userState.serverErrorMsg
+        serverErrorMsg: store.userState.serverLoginErrorMsg
     };
 };
 

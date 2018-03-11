@@ -30,6 +30,7 @@
     "express": "^4.16.2",
     "express-cors": "0.0.3",
     "express-session": "^1.15.6",
+    "history": "^4.7.2",
     "html-webpack-plugin": "^2.30.1",
     "jest": "^22.4.2",
     "jest-cli": "^22.4.2",
@@ -55,6 +56,8 @@
     "redux-test-utils": "^0.2.2",
     "redux-thunk": "^2.2.0",
     "save": "^2.3.2",
+    "singleton-js": "^1.0.0",
+    "validator": "^9.4.1",
     "webpack-hot-middleware": "^2.21.2"
   },
   "devDependencies": {

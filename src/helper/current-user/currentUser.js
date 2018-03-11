@@ -1,53 +1,42 @@
-import axios from 'axios';
-import qs from 'qs';
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import { currentUser } from '../../helper/userApi/userApi';
 
-import { isRedirected, logOn, errorMessage } from '../../redux/actions/UserActions';
-
-export const currentUser = {
-    isAuthenticated: true,
-    name: "Unknown",
-    authenticate(user) {
-        return (dispatch) => {
-            axios({
-                method: 'POST',
-                url: 'http://localhost:3000/api/signup',
-                withCredentials: true,
-                data: qs.stringify(user)
-            }).then((response) => {
-                //this.isAuthenticated = true;
-
-                //return response;
-            })
-                .catch((error) => {
-                    console.log(error);
-                });
-        }
-    },
-    logIn(user){
-        return async (dispatch) => {
-            await axios({
-                method: 'POST',
-                url: 'http://localhost:3000/api/login',
-                withCredentials: true,
-                data: qs.stringify(user)
-            }).then((response) => {
-                const data = response.data;
-                if(data.message){
-                    dispatch(errorMessage(data.message))
-                }else{
-                    //console.log(window);
-                    this.isAuthenticated = true;
-                    dispatch(isRedirected(true));
-                }
-                //return response;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        }
-    },
-    signout(cb) {
-        delete window.sessionStorage.isLogged;
-        setTimeout(cb, 100)
+class CurrentUser extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        props.isExist();
     }
+
+    render() {
+        if (!this.props.isServerLoggedIn) {
+            return <Redirect to="/" />;
+        }
+        if(currentUser.isLoggedIn()) {
+            return(
+                <div className="signout">
+                    <button onClick={this.props.logOff} className="find-blog btn btn-primary">Log Out</button>
+                </div>);
+        }
+
+        return null;
+    }
+}
+
+const mapStateToProps = function (store) {
+    return {
+        isServerLoggedIn: store.userState.isServerLoggedIn
+    };
 };
+
+function mapDispatchToProps(dispatch) {
+    return {
+        logOff: bindActionCreators(currentUser.signout.bind(currentUser), dispatch),
+        isExist: bindActionCreators(currentUser.isExist.bind(currentUser), dispatch)
+    };
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CurrentUser));

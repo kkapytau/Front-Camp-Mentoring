@@ -55,7 +55,7 @@ function isLoggedIn(req, res, next) {
 
     // if user is authenticated in the session, carry on
     // Uncomment that for checking Task5
-    if(/*req.isAuthenticated()*/true) {
+    if(req.isAuthenticated()) {
         console.log("user is Authenticated")
         return next();
     }

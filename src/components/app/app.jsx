@@ -10,18 +10,18 @@ import { renderRoutes } from 'react-router-config';
 import routes from '../../routes/routes';
 import './styles.scss';
 
-export default function App() {
-    /*return (
+export default function App(props) {
+    return (
         <Switch>
             <Route exact path='/' component={LoginForm}/>
             <Route path='/signup' component={RegisterForm}/>
-            <PrivateRoute path='/add-blog' component={AddBlogForm}/>
-            <PrivateRoute path='/blogs' component={Wrapper}/>
+            <PrivateRoute path='/add-blog' component={AddBlogForm} />
+            <PrivateRoute path='/blogs' component={Wrapper} />
         </Switch>
-    );*/
-    return (
+    );
+    /*return (
         <Switch>
             { renderRoutes(routes) }
         </Switch>
-    );
+    );*/
 }

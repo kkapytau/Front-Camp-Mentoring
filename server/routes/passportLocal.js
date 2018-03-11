@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-
+const url = require('url');
 /* Passport Start */
 
 
@@ -19,8 +19,9 @@ router.post('/login', passport.authenticate('local-login', {
   failureFlash: true
 }));
 
-// show the login form
-router.post('/user', function(req, res) {
+
+router.get('/user', function(req, res) {
+    console.log(req.user)
     res.json(req.user);
 });
 
@@ -33,7 +34,14 @@ router.get('/login', function(req, res) {
 
 router.get('/logout', function(req, res) {
   req.logout();
-  res.redirect('/');
+    /*const origin = (req.get('Origin'))
+        ? req.get('Origin')
+        : url.format({
+            protocol: req.protocol,
+            host: req.get('host'),
+            pathname: ""
+        })*/
+  res.redirect('/api/user');
 });
 
 /* Passport End */

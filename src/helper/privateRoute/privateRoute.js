@@ -1,10 +1,10 @@
 import React from 'react';
-import { currentUser } from '../current-user/currentUser';
+import { currentUser } from '../userApi/userApi';
 import { Route, Redirect } from 'react-router-dom';
 
 export const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={(props) => (
-        currentUser.isAuthenticated  == true
+        currentUser.isLoggedIn()  == true
          ? <Component {...props} />
          : <Redirect to={{
          pathname: '/',
