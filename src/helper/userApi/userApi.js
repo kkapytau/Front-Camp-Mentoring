@@ -54,6 +54,7 @@ export const currentUser = {
                 }else{
                     localStorage.token = Math.random().toString(36).substring(7);
                     this.name = response.data.email;
+                    dispatch(isServerLoggedIn(true));
                     dispatch(isRedirected(true));
                 }
             })
@@ -72,9 +73,6 @@ export const currentUser = {
                 url: 'http://localhost:3000/api/logout',
                 withCredentials: true
             }).then(() => {
-                /*delete localStorage.token;
-                dispatch(isRedirected(false));
-                dispatch(isServerLoggedIn(false));*/
                 this.signoutHelper(dispatch);
             })
             .catch((error) => {
@@ -83,6 +81,7 @@ export const currentUser = {
         }
     },
     signoutHelper(dispatch) {
+        console.log("signoutHelper")
         delete localStorage.token;
         dispatch(isRedirected(false));
         dispatch(isServerLoggedIn(false));
