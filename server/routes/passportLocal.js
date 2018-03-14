@@ -21,6 +21,7 @@ router.post('/login', passport.authenticate('local-login', {
 
 
 router.get('/user', function(req, res) {
+    console.log("current user is:")
     console.log(req.user)
     res.json(req.user);
 });

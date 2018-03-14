@@ -32,8 +32,9 @@ const allowedOrigins = [
 
 app.use(cors({
   //origin: 'http://localhost:8081',
-  origin: true,
-  credentials:true
+  origin: 'http://localhost:3000',
+  //origin: true,
+  credentials: true
 }));
 
 /*app.use(cors({
@@ -89,10 +90,10 @@ app.get('*', (req, res) => {
 
   const branch = matchRoutes(routes, req.path);
 
-  const promises = branch.map(({ route, match }) => {
+  const promises = branch.map(({ route }) => {
     const { fetchData } = route.component;
     return fetchData instanceof Function ?
-        fetchData(store.dispatch, match, req.url) :
+        fetchData(store.dispatch) :
         Promise.resolve(null);
   });
 

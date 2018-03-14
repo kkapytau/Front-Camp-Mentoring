@@ -11,7 +11,7 @@ export const currentUser = {
                 url: 'http://localhost:3000/api/user',
                 withCredentials: true
             }).then((response) => {
-                if ("" == response.data && (typeof localStorage !== 'undefined' && this.isLoggedIn())) {
+                if ("" == response.data && this.isLoggedIn()) {
                     this.signoutHelper(dispatch);
                 }
             })
@@ -64,7 +64,7 @@ export const currentUser = {
         }
     },
     isLoggedIn() {
-        return !!localStorage.token
+        return (typeof localStorage !== 'undefined') ? !!localStorage.token : true;
     },
     signout() {
         return async (dispatch) => {
@@ -81,8 +81,9 @@ export const currentUser = {
         }
     },
     signoutHelper(dispatch) {
-        console.log("signoutHelper")
-        delete localStorage.token;
+        if(typeof localStorage !== 'undefined') {
+            delete localStorage.token;
+        }
         dispatch(isRedirected(false));
         dispatch(isServerLoggedIn(false));
     }
