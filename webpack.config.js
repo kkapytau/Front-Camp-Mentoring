@@ -7,6 +7,7 @@ const config = {
   context: path.join(__dirname, 'src'),
   entry: {
     blogs: [
+      'babel-polyfill',
       'react-hot-loader/patch',
       './index.jsx'
     ]
@@ -16,7 +17,13 @@ const config = {
     filename: '[name].js',
     publicPath: '/'
   },
-
+  node: {
+    dns: 'empty',
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+    module: 'empty'
+  },
   devServer: {
     historyApiFallback: true,
     hot: true,

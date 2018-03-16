@@ -1,11 +1,10 @@
-.add-blog{
-  margin: 0 0 20px 16px;
-}
-
 .blog-form {
   margin: 0 0 30px 16px;
   &.hidden {
     display: none;
+  }
+  .btn-success{
+    float: right;
   }
 }
 
