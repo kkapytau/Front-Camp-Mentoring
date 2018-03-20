@@ -1,6 +1,6 @@
 (function() {
     "use strict";
-    angular.module("todoListApp", ["ui.router"])
+    angular.module("todoListApp", ["ui.router", "ngResource"])
         .config(appConfig);
 
     function appConfig($stateProvider, $urlRouterProvider){

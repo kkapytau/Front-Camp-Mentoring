@@ -1,6 +1,7 @@
-<form name="myForm">
+
+<form name="myForm" novalidate>
     <div class="add">
-        <input ng-model="newTodoTitle"  required type="text"/> <a href="" ng-click="addTodo(newTodoTitle)">+ Add a New Task</a>
-        <h1 ng-show="!isNewTodoTitleValid">Name can't be empty and it's length should be at least 4 symbols </h1>
+        <input ng-model="newTodoTitle" name="title" ng-minlength="4"  required type="text"/> <a href="" ng-click="addTodo(newTodoTitle, myForm.title.$valid)">+ Add a New Task</a>
+        <h1 ng-show="!myForm.title.$valid">Name can't be empty and it's length should be at least 4 symbols </h1>
     </div>
 </form>

@@ -6,11 +6,11 @@
 
     function addTodo($scope, todoService, $state){
 
-        $scope.isNewTodoTitleValid = true;
+        //$scope.isNewTodoTitleValid = true;
 
-        $scope.addTodo = function (todoTitle) {
-            if(todoTitle === undefined || todoTitle.length < 4){
-                $scope.isNewTodoTitleValid = false;
+        $scope.addTodo = function (todoTitle, isValid) {
+            if(!isValid){
+                //$scope.isNewTodoTitleValid = false;
                 return false;
             }
             var todo = {
@@ -19,7 +19,7 @@
             };
             todoService.addTodo(todo);
             $scope.newTodoTitle = "";
-            $scope.isNewTodoTitleValid = true;
+            //$scope.isNewTodoTitleValid = true;
             $state.go("todoList", {});
         };
 

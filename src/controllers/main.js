@@ -17,7 +17,7 @@
             });*/
 
             todoService.getLocalTodos(function(response){
-                $scope.todos = response.data;
+                $scope.todos = response;
             });
 
 

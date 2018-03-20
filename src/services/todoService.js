@@ -1,7 +1,7 @@
 (function() {
     "use strict";
     angular.module("todoListApp").
-    service("todoService",todoService)
+    service("todoService", todoService)
     ;
 
     /*let todoList = [
@@ -24,18 +24,22 @@
     ];*/
     let todoList = [];
 
-    function todoService($http){
+    function todoService($http, $resource){
 
         this.getStaticTodos = function(){
             return todoList;
         };
 
         this.getLocalTodos = function(callback) {
-            $http.get('todoList.json')
+            /*$http.get('todoList.json')
                 .then(response => {
                     todoList = response.data;
                     callback(response);
-                })
+                })*/
+            $resource('todoList.json').query().$promise.then(todos => {
+                todoList = todos;
+                callback(todos);
+            })
         };
 
         this.addDateForTodo = function(list){

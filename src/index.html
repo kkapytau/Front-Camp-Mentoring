@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js'></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.min.js"></script>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -15,33 +16,6 @@
 <body ng-app="todoListApp">
     <h1>My TODOs</h1>
      <div ui-view></div>
-    <!-- <div ng-controller="mainController" class="list">
-        <form name="myForm">
-            <div class="add">
-                <input ng-model="newTodoTitle"  required type="text"/> <a href="" ng-click="addTodo(newTodoTitle)">+ Add a New Task</a>
-                <h1 ng-show="!isNewTodoTitleValid">AAAA</h1>
-            </div>
-        </form>
-        <div class="filters">
-            <label>How Old Todo Filter:</label>
-            <input ng-model="daysNumber" type="text"/>
-            <label>First Letter Filter:</label>
-            <input ng-model="letter" maxlength="1" type="text"/>
-            <label>Day Filter:</label>
-            <input ng-model="day" type="text"/>
-        </div>
-        <div class="item" ng-class="{'editing-item': editing, 'edited': todo.edited}" ng-repeat="todo in todos | todoInDays:daysNumber | firstLetter:letter | days:day">
-            <input ng-model="todo.completed" type="checkbox"/>
-            <label ng-hide="editing" ng-click="editing = !editing">{{todo.name}}</label>
-            <input ng-change="todo.edited = true" ng-blur="editing = false;" ng-show="editing" ng-model="todo.name" class="editing-label" type="text"/>
-            <span class="todo-date">{{todo.date | date:"yyyy-MM-dd"}}</span>
-            <div class="actions">
-                <a href="" ng-click="saveTodo(todo)">Save</a>
-                <a href="" ng-click="deleteTodo(todo, $index)" class="delete">Delete</a>
-            </div>
-        </div>
-    </div>-->
-
 
     <script  src="app/todoApp.js"></script>
 
