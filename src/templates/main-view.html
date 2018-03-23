@@ -1,0 +1,60 @@
+<div class="list">
+    <div class="add">
+        <a ui-sref="addTodo" >Add a New Task</a>
+    </div>
+
+    <div class="filters">
+        <span class="filter">
+            <label>How Old Todo Filter:</label>
+            <input ng-model="daysNumber" type="text"/>
+        </span>
+        <span class="filter">
+            <label>First Letter Filter:</label>
+            <input ng-model="letter" maxlength="1" type="text"/>
+        </span>
+        <span class="filter">
+            <label>Day Filter:</label>
+            <input ng-model="day" type="text"/>
+        </span>
+    </div>
+    <!-- <div class="item">
+         <span>Not ready todo</span>
+         <span>Ready todo</span>
+         <span>Date</span>
+         <span>Action</span>
+     </div>
+     <div class="item" ng-class="{'editing-item': editing, 'edited': todo.edited}" ng-repeat="todo in todos | todoInDays:daysNumber | firstLetter:letter | days:day">
+         <span class="not-completed-todo">
+             <input ng-model="todo.completed" type="checkbox"/>
+             <label ng-show="!todo.completed" ui-sref="editTodo({id:'{{$index}}'})">{{todo.name}}</label>
+         </span>
+         <span class="completed-todo" ng-show="todo.completed">
+             <label ui-sref="editTodo({id:'{{$index}}'})">{{todo.name}}</label>
+         </span>
+         <span class="todo-date">{{todo.date | date:"yyyy-MM-dd"}}</span>
+         <div class="actions">
+             <a href="" ng-click="deleteTodo(todo, $index)" class="delete">Delete</a>
+         </div>
+     </div> -->
+    <table class="todo-list table table-striped">
+        <thead>
+        <tr>
+            <th>Not ready todo</th>
+            <th>Ready todo</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="todo in todos | todoInDays:daysNumber | firstLetter:letter | days:day">
+            <td><input class="pointer" ng-model="todo.completed" type="checkbox"/>
+                <label class="pointer" ng-show="!todo.completed" ui-sref="editTodo({id:'{{$index}}'})">{{todo.name}}</label>
+            </td>
+            <td><label class="pointer" ng-show="todo.completed" ui-sref="editTodo({id:'{{$index}}'})">{{todo.name}}</label></td>
+            <td><span class="todo-date">{{todo.date | date:"yyyy-MM-dd"}}</span></td>
+            <td><a href="" ng-click="deleteTodo(todo, $index)" class="delete">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
