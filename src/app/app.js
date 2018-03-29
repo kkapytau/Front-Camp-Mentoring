@@ -1,5 +1,6 @@
 import angular from 'angular';
 import ngResource from 'angular-resource';
+import uiRouter from '@uirouter/angularjs';
 
 import { AppComponent } from './app.component';
 import { ArticleService } from '../services/ArticleService';
@@ -8,10 +9,13 @@ import { articleComponents } from '../components/index';
 import addArticle from '../directives/addArticle/addArticle';
 import minLengthValidator from '../directives/min-length-checker/minLength';
 
+import appConfig from '../routes/routes';
+
 import './styles.scss';
 
 export const AppModule = angular
     .module('articleListApp', [
+        uiRouter,
         ngResource,
         //AppServices,
         articleComponents])
@@ -19,5 +23,5 @@ export const AppModule = angular
     .component('app', AppComponent)
     .directive('addArticle', addArticle)
     .directive('minimalLength', minLengthValidator)
-    //.component('articleList', ArticleListComponent)
+    .config(appConfig)
     .name;

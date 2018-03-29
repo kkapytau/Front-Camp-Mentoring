@@ -6,13 +6,11 @@ export const ArticleItemComponent = {
     },
     template,
     controller: class ArticleItem {
-        constructor() {
-
+        constructor($state) {
+            this.state = $state;
         }
-        $onChanges(changes) {
-            if (changes.article) {
-                this.article = Object.assign({}, this.article);
-            }
+        updateArticleHandler(){
+            this.state.go("articles.update", {article: this.article});
         }
     }
 };

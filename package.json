@@ -9,6 +9,7 @@
   },
   "author": "Mr. K",
   "dependencies": {
+    "@uirouter/angularjs": "^1.0.15",
     "angular": "^1.6.9",
     "angular-resource": "^1.6.9",
     "axios": "^0.18.0",
@@ -23,6 +24,7 @@
     "html-webpack-plugin": "^2.30.1",
     "node-sass": "^4.8.3",
     "nodemon": "^1.17.2",
+    "uuid-v4": "^0.1.0",
     "webpack-hot-middleware": "^2.21.2"
   },
   "devDependencies": {

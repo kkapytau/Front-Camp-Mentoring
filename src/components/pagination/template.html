@@ -1,4 +1,4 @@
-<nav aria-label="Article Navigation">
+<nav aria-label="Article Navigation" class="pagination-wrapper">
     <ul class="pagination">
         <li id="previous-article" class="page-item"><a ng-click="$ctrl.previousPage()" class="page-link" >Previous</a></li>
         <li ng-class="{'active': ($ctrl.currentIndex == $index)}" ng-repeat="page in $ctrl.pages" class="page-item"><a ng-click="$ctrl.jumpToPage($index)" class="page-link" >{{$index + 1}}</a></li>
