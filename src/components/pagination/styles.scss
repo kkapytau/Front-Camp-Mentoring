@@ -1,0 +1,9 @@
+@import '../../common-styles/common.scss';
+
+.pagination-wrapper{
+  @include article-forms();
+}
+
+.pagination a.page-link{
+  cursor: pointer;
+}

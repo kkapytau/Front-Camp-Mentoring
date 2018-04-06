@@ -1,0 +1,16 @@
+<form name="myForm" novalidate>
+    <div class="form-group">
+        <label for="title">Article Title</label>
+        <input type="test" class="form-control" id="title" placeholder="Title"
+               ng-model="vm.article.title" name="title" ng-minlength="4" required>
+        <h3 ng-show="!myForm.title.$valid && myForm.title.$touched">Title can't be empty and it's length should be at least 4 symbols </h3>
+    </div>
+    <div class="form-group">
+        <label for="textarea">Description</label>
+        <textarea class="form-control" id="textarea" rows="3" ng-model="vm.article.description"
+                  name="description" minimal-length="4"  required></textarea>
+        <h3 ng-show="!myForm.description.$valid  && myForm.description.$touched">Description can't be empty and it's length should be at least 20 symbols </h3>
+    </div>
+    <button type="submit" class="btn btn-success" ng-click="vm.submitHandler(myForm.$valid)">Add a New Article</button>
+    <button ui-sref="articles.list" class="btn btn-primary" >Back to List of Article</button>
+</form>
