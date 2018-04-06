@@ -5,18 +5,17 @@ export default function addArticle() {
     return {
         restrict: 'E',
         scope: {},
-        controllerAs: "vm",
         controller: function($scope, ArticleService, $state){
 
-            this.isUpdate = !!$state.params.article;
-            this.article = $state.params.article;
+            $scope.isUpdate = !!$state.params.article;
+            $scope.article = $state.params.article;
 
-            this.submitHandler = function (isValid) {
+            $scope.submitHandler = function (isValid) {
                 if(!isValid){
                     return false;
                 }
 
-                (this.isUpdate) ? ArticleService.updateArticle(this.article) : ArticleService.addArticle(this.article);
+                ($scope.isUpdate) ? ArticleService.updateArticle($scope.article) : ArticleService.addArticle($scope.article);
 
                 $state.go('articles.list');
 

@@ -40,7 +40,6 @@ export const PaginationComponent = {
         }
 
         $onChanges(changes) {
-            //console.log(changes)
             this.lastIndex = changes.maxNumber.currentValue;
             this.pages = this.getPages(this.lastIndex);
         }

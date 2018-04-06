@@ -22,6 +22,6 @@ export const AppModule = angular
     .service('ArticleService', ArticleService)
     .component('app', AppComponent)
     .directive('addArticle', addArticle)
-    .directive('minimalLength', minLengthValidator)
+    //.directive('minimalLength', minLengthValidator)
     .config(appConfig)
     .name;
